@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :task do
     title { "テストタイトル" }
-    status { 0 }
+    status { "todo" }
   end
 end

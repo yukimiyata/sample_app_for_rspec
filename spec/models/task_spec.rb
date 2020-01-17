@@ -22,7 +22,7 @@ RSpec.describe Task, type: :model do
         task
         another_task = Task.new(
             title: "テストタイトル",
-            status: 1
+            status: "doing"
         )
         expect(another_task).to_not be_valid
     end
