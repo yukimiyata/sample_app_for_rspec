@@ -23,8 +23,8 @@ RSpec.describe Task, type: :model do
     it 'is invalid with a duplicate title' do
       task
       another_task = Task.new(
-          title: "テストタイトル",
-          status: "doing"
+          title: 'テストタイトル',
+          status: :doing
       )
       expect(another_task).to_not be_valid
       expect(another_task.errors[:title]).to include("has already been taken")
@@ -33,8 +33,8 @@ RSpec.describe Task, type: :model do
     it "is valid with a another title" do
       task
       another_task = Task.new(
-          title: "テストタイトル２",
-          status: "todo"
+          title: 'テストタイトル２',
+          status: :todo
       )
       expect(another_task).to be_valid
     end
