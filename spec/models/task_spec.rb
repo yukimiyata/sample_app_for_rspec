@@ -34,7 +34,7 @@ RSpec.describe Task, type: :model do
       task
       another_task = Task.new(
           title: "テストタイトル２",
-          status: 0
+          status: "todo"
       )
       expect(another_task).to be_valid
     end
