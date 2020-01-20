@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'UserSessions', type: :system do
   let(:user) { create(:user, email: 'testsample1@example.com') }
   describe 'login' do
-    context ' success' do
+    context 'input correct value in the form' do
       it 'is valid to login' do
         user
         visit login_path
@@ -15,7 +15,7 @@ RSpec.describe 'UserSessions', type: :system do
       end
     end
 
-    context 'fail' do
+    context 'input invalid value in the form' do
       it 'is invalid to login without value' do
         visit login_url
         click_button 'Login'
