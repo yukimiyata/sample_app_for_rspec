@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Users', type: :system do
   let(:user) { create(:user, email: 'testsample1@example.com') }
+  let(:another_user) { create(:user, email: 'testsample2@example.com') }
   describe 'create a new user' do
     context 'input correct value in form' do
       it 'is valid to create a new user' do
@@ -55,17 +56,12 @@ RSpec.describe 'Users', type: :system do
 
     context 'logged_in another_user' do
       it 'failed to edit the user by another_user' do
-        User.create(
-            email: 'testsample2@example.com',
-            password: 'password',
-            password_confirmation: 'password'
-        )
-        another_user = User.first
+        user
+        another_user
         login(another_user)
         visit edit_user_path(user)
         expect(page).to have_content 'Forbidden access.'
         expect(current_path).to eq user_path(another_user)
-        expect(page).to have_content 'Forbidden access.'
       end
     end
 
@@ -100,23 +96,3 @@ RSpec.describe 'Users', type: :system do
     end
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
