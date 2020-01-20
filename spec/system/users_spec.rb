@@ -77,7 +77,7 @@ RSpec.describe 'Users', type: :system do
   end
 
   describe 'my_page' do
-    context 'index task' do
+    context 'already logged_in' do
       it 'can see users task in my_page' do
         login(user)
         create(:task, user_id: user.id)
