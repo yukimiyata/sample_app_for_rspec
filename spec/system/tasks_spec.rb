@@ -17,11 +17,15 @@ RSpec.describe 'Tasks', type: :system do
     end
 
     context 'invalid to create a task' do
-
+      it 'is invalid to create a task without login' do
+        visit new_task_path
+        expect(current_path).to eq login_path
+        expect(page).to have_content 'Login required'
+      end
     end
   end
 
-  describe 'edit a task'do
+  describe 'edit a task' do
     context 'valid to edit a task' do
       it 'is valid to edit a task by current_user' do
         login(user)
@@ -38,6 +42,35 @@ RSpec.describe 'Tasks', type: :system do
         expect(page).to have_content 'doing'
         expect(page).to have_content '2020/1/1 0:0'
         expect(current_path).to eq task_path(task)
+      end
+    end
+
+    context 'invalid to edit a task' do
+      it 'is invalid to edit a task without login' do
+        user
+        task = create(:task,user_id: user.id)
+        expect(Task.count).to eq 1
+        visit edit_task_path(task)
+        expect(current_path).to eq login_path
+        expect(page).to have_content 'Login required'
+      end
+    end
+
+    context 'logged_in another_user' do
+      it 'failed to edit the task by another_user' do
+        user
+        task = create(:task, user_id: user.id)
+        User.create(
+            email: 'testsample2@gmail.com',
+            password: 'password',
+            password_confirmation: 'password'
+        )
+        another_user = User.first
+        login(another_user)
+        expect(current_path).to eq user_path(another_user)
+        visit edit_task_path(task)
+        expect(current_path).to eq root_path
+        expect(page).to have_content 'Forbidden'
       end
     end
   end
