@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :system do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, email: 'testsample1@example.com') }
+  let(:another_user) { create(:user, email: 'testsample2@example.com') }
   describe 'create a task' do
     context 'valid to create a task' do
       it 'is valid to create a task by current_user' do
@@ -59,13 +60,8 @@ RSpec.describe 'Tasks', type: :system do
     context 'logged_in another_user' do
       it 'failed to edit the task by another_user' do
         user
+        another_user
         task = create(:task, user_id: user.id)
-        User.create(
-            email: 'testsample2@gmail.com',
-            password: 'password',
-            password_confirmation: 'password'
-        )
-        another_user = User.first
         login(another_user)
         expect(current_path).to eq user_path(another_user)
         visit edit_task_path(task)

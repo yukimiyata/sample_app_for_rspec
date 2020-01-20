@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :system do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, email: 'testsample1@example.com') }
   describe 'create a new user' do
     context 'input correct value in form' do
       it 'is valid to create a new user' do
@@ -29,7 +29,7 @@ RSpec.describe 'Users', type: :system do
       it 'is invalid to create a user' do
         user
         visit sign_up_url
-        fill_in 'Email', with: 'testsample@example.com'
+        fill_in 'Email', with: 'testsample1@example.com'
         fill_in 'Password', with: 'password'
         fill_in 'Password confirmation', with: 'password'
         click_button 'SignUp'
