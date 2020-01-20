@@ -4,7 +4,7 @@ RSpec.describe 'Tasks', type: :system do
   let(:user) { create(:user, email: 'testsample1@example.com') }
   let(:another_user) { create(:user, email: 'testsample2@example.com') }
   describe 'create a task' do
-    context 'valid to create a task' do
+    context 'logged_in user' do
       it 'is valid to create a task by current_user' do
         login(user)
         visit new_task_path
