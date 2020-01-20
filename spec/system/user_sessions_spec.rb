@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'UserSessions', type: :system do
-  let(:user) { create(:user, email: 'testsample1@example.com') }
+  let(:user) { create(:user) }
   describe 'login' do
     context 'input correct value in the form' do
       it 'is valid to login' do

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :system do
-  let(:user) { create(:user, email: 'testsample1@example.com') }
+  let(:user) { create(:user) }
   let(:another_user) { create(:user, email: 'testsample2@example.com') }
   describe 'create a task' do
     context 'logged_in user' do

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :system do
-  let(:user) { create(:user, email: 'testsample1@example.com') }
+  let(:user) { create(:user) }
   let(:another_user) { create(:user, email: 'testsample2@example.com') }
   describe 'create a new user' do
     context 'input correct value in form' do
