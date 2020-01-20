@@ -20,6 +20,7 @@ RSpec.describe 'UserSessions', type: :system do
         visit login_url
         click_button 'Login'
         expect(page).to have_content 'Login failed'
+        expect(current_path).to eq login_path
       end
     end
   end
