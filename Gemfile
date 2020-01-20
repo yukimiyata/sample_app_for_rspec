@@ -15,6 +15,9 @@ gem 'sorcery'
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem 'webdrivers'
+  gem 'selenium-webdriver'
+  gem 'capybara'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
