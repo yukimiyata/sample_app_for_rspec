@@ -49,7 +49,7 @@ RSpec.describe 'Tasks', type: :system do
     context 'invalid to edit a task' do
       it 'is invalid to edit a task without login' do
         user
-        task = create(:task,user_id: user.id)
+        task = create(:task, user_id: user.id)
         expect(Task.count).to eq 1
         visit edit_task_path(task)
         expect(current_path).to eq login_path
@@ -72,16 +72,14 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'destroy a task' do
-    context 'valid to destroy a task' do
-      it 'is valid to destroy a task by current_user' do
-        login(user)
-        create(:task, user_id: user.id)
-        visit user_path(user)
-        click_on 'Destroy'
-        page.driver.browser.switch_to.alert.accept
-        expect(page).to have_content 'Task was successfully destroyed.'
-        expect(Task.count).to eq 0
-      end
+    it 'is valid to destroy a task by current_user' do
+      login(user)
+      create(:task, user_id: user.id)
+      visit user_path(user)
+      click_on 'Destroy'
+      page.driver.browser.switch_to.alert.accept
+      expect(page).to have_content 'Task was successfully destroyed.'
+      expect(Task.count).to eq 0
     end
   end
 end
