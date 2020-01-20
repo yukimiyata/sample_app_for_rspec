@@ -6,7 +6,7 @@ RSpec.describe 'Users', type: :system do
     context 'input correct value in form' do
       it 'is valid to create a new user' do
         visit sign_up_path
-        fill_in 'Email', with: 'testsample@gmail.com'
+        fill_in 'Email', with: 'testsample@example.com'
         fill_in 'Password', with: 'password'
         fill_in 'Password confirmation', with: 'password'
         click_button 'SignUp'
@@ -29,7 +29,7 @@ RSpec.describe 'Users', type: :system do
       it 'is invalid to create a user' do
         user
         visit sign_up_url
-        fill_in 'Email', with: 'testsample@gmail.com'
+        fill_in 'Email', with: 'testsample@example.com'
         fill_in 'Password', with: 'password'
         fill_in 'Password confirmation', with: 'password'
         click_button 'SignUp'
@@ -43,11 +43,11 @@ RSpec.describe 'Users', type: :system do
       it 'is valid to edit user' do
         login(user)
         visit edit_user_path(user)
-        fill_in 'Email', with: 'sampletest@gmail.com'
+        fill_in 'Email', with: 'sampletest@example.com'
         fill_in 'Password', with: 'password'
         fill_in 'Password confirmation', with: 'password'
         click_button 'Update'
-        expect(page).to have_content 'Email: sampletest@gmail.com'
+        expect(page).to have_content 'Email: sampletest@example.com'
         expect(current_path).to eq user_path(user)
         expect(page).to have_content 'User was successfully updated.'
       end
@@ -56,7 +56,7 @@ RSpec.describe 'Users', type: :system do
     context 'logged_in another_user' do
       it 'failed to edit the user by another_user' do
         User.create(
-            email: 'testsample2@gmail.com',
+            email: 'testsample2@example.com',
             password: 'password',
             password_confirmation: 'password'
         )
